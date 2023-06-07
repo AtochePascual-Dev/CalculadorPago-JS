@@ -1,5 +1,18 @@
 // * IMPORTACIONES
-import { mesaHtml, horaHtml } from './variables.js';
+import {
+  mesaHtml, horaHtml, modal, platillosHtml, resumenHtml
+} from './variables.js';
+
+
+
+// * VARIABLES
+let cliente = {
+  mesa: '',
+  hora: '',
+  pedido: [],
+};
+
+
 
 // * Cuarda un cliente
 export const guardarCliente = () => {
@@ -13,6 +26,16 @@ export const guardarCliente = () => {
     mostrarAlerta('Todos los campos son obligatorios');
     return;
   }
+
+  // Asignamos los valores al objeto
+  cliente = { ...cliente, mesa, hora, }
+
+  // Ocultamos el modal
+  const modalBootstrap = bootstrap.Modal.getInstance(modal);
+  modalBootstrap.hide();
+
+  // Mostramos las secciones
+  mostrarSecciones();
 };
 
 
@@ -34,4 +57,12 @@ const mostrarAlerta = (mensaje) => {
       alerta.remove();
     }, 3000);
   }
+};
+
+
+
+// * Muestra las secciones
+const mostrarSecciones = () => {
+  platillosHtml.classList.remove('d-none');
+  resumenHtml.classList.remove('d-none');
 };
