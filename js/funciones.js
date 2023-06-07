@@ -142,8 +142,8 @@ const agregarPedido = (producto) => {
   // Validamos que al cnatidad sea mayor a 0
   if (producto.cantidad > 0) {
     (exiteProductoEnPedido)
-      ? aumentarCantidadProducto()
-      : agregarPedidoProducto(producto)
+      ? aumentarCantidadProducto(producto)
+      : agregarProductoPedido(producto)
   } else {
 
   }
@@ -154,6 +154,18 @@ const agregarPedido = (producto) => {
 
 
 // * Agrega un producto como pedido
-const agregarPedidoProducto = (producto) => {
+const agregarProductoPedido = (producto) => {
   cliente.pedido = [...cliente.pedido, producto];
+};
+
+
+
+// * Aumenta la cantidad de un producto en la lisat de pedidos
+const aumentarCantidadProducto = (producto) => {
+  cliente.pedido = cliente.pedido.map(pedido => {
+    if (pedido.id === producto.id) {
+      pedido.cantidad = producto.cantidad;
+    }
+    return pedido;
+  });
 };
