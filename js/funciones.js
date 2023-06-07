@@ -142,9 +142,18 @@ const agregarPedido = (producto) => {
   // Validamos que al cnatidad sea mayor a 0
   if (producto.cantidad > 0) {
     (exiteProductoEnPedido)
-      ? agregarPedido()
-      : aumentarCantidad()
+      ? aumentarCantidadProducto()
+      : agregarPedidoProducto(producto)
   } else {
 
   }
+
+  console.log(cliente.pedido);
+};
+
+
+
+// * Agrega un producto como pedido
+const agregarPedidoProducto = (producto) => {
+  cliente.pedido = [...cliente.pedido, producto];
 };
