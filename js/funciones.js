@@ -12,6 +12,11 @@ let cliente = {
   pedido: [],
 };
 
+const categorias = {
+  1: 'Comida',
+  2: 'Bebida',
+  3: 'Postre',
+}
 
 
 // * Cuarda un cliente
@@ -78,6 +83,48 @@ const obtnerPlatillos = () => {
 
   fetch(URL)
     .then(respuesta => respuesta.json())
-    .then(resultado => console.log(resultado))
+    .then(resultado => {
+      mostrarPlatillos(resultado)
+    })
     .catch(error => console.log(error))
+};
+
+
+
+// * Muestra los platillos en pantalla 
+const mostrarPlatillos = (platillos) => {
+  const contenido = document.querySelector('#platillos .contenido');
+
+  platillos.forEach(plato => {
+    const row = document.createElement('DIV');
+    row.classList.add('row', 'py-3', 'border-top');
+
+    const nombre = document.createElement('DIV');
+    nombre.classList.add('col-md-4');
+    nombre.textContent = plato.nombre;
+
+    const precio = document.createElement('DIV');
+    precio.classList.add('col-md-3', 'fw-bold');
+    precio.textContent = `$${plato.precio}`;
+
+    const categoria = document.createElement('DIV');
+    categoria.classList.add('col-md-3');
+    categoria.textContent = categorias[plato.categoria];
+
+    const inputCantidad = document.createElement('INPUT');
+    inputCantidad.type = 'number';
+    inputCantidad.min = 0;
+    inputCantidad.value = 0;
+    inputCantidad.id = `producto-${plato.id}`;
+    inputCantidad.classList.add('form-control');
+
+    const agregar = document.createElement('DIV')
+    agregar.classList.add('col-md-2');
+
+    agregar.appendChild(inputCantidad);
+
+    row.append(nombre, precio, categoria, agregar);
+
+    contenido.appendChild(row);
+  });
 };
