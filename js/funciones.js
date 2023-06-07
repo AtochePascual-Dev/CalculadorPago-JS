@@ -117,6 +117,10 @@ const mostrarPlatillos = (platillos) => {
     inputCantidad.value = 0;
     inputCantidad.id = `producto-${plato.id}`;
     inputCantidad.classList.add('form-control');
+    inputCantidad.onchange = () => {
+      const cantidad = Number(inputCantidad.value);
+      agregarPedido({ cantidad, ...plato });
+    };
 
     const agregar = document.createElement('DIV')
     agregar.classList.add('col-md-2');
@@ -127,4 +131,20 @@ const mostrarPlatillos = (platillos) => {
 
     contenido.appendChild(row);
   });
+};
+
+
+
+// * Agrega un pedio al array de pedidos  
+const agregarPedido = (producto) => {
+  const exiteProductoEnPedido = cliente.pedido.some(pedido => pedido.id === producto.id);
+
+  // Validamos que al cnatidad sea mayor a 0
+  if (producto.cantidad > 0) {
+    (exiteProductoEnPedido)
+      ? agregarPedido()
+      : aumentarCantidad()
+  } else {
+
+  }
 };
