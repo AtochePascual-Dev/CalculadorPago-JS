@@ -36,6 +36,9 @@ export const guardarCliente = () => {
 
   // Mostramos las secciones
   mostrarSecciones();
+
+  // Obtener platillos de PI JSON-SERVER
+  obtnerPlatillos()
 };
 
 
@@ -65,4 +68,16 @@ const mostrarAlerta = (mensaje) => {
 const mostrarSecciones = () => {
   platillosHtml.classList.remove('d-none');
   resumenHtml.classList.remove('d-none');
+};
+
+
+
+// * Obtiene los platillos del API
+const obtnerPlatillos = () => {
+  const URL = `http://localhost:4000/platillos`;
+
+  fetch(URL)
+    .then(respuesta => respuesta.json())
+    .then(resultado => console.log(resultado))
+    .catch(error => console.log(error))
 };
