@@ -149,6 +149,9 @@ const agregarPedido = (producto) => {
     // Eliminamos un producto
     eliminarProductoPedido(producto.id);
   }
+
+  // Mostramos el resumen
+  mostrarResumen();
 };
 
 
@@ -175,4 +178,35 @@ const aumentarCantidadProducto = (producto) => {
 // * Elimina un producto de la lista de pedidos
 const eliminarProductoPedido = (id) => {
   cliente.pedido = cliente.pedido.filter(pedido => pedido.id !== id);
+};
+
+
+
+// * Muestra el resumen de pedids en pantalla
+const mostrarResumen = () => {
+  const contenido = document.querySelector('#resumen .contenido');
+
+  const resumen = document.createElement('DIV');
+  resumen.classList.add('col-md-6');
+
+  const mesa = document.createElement('P');
+  mesa.textContent = `Mesa :`
+  mesa.classList.add('fw-bold');
+
+  const mesaSpan = document.createElement('SPAN');
+  mesaSpan.textContent = `${cliente.mesa}`
+  mesaSpan.classList.add('fw-normal');
+
+  const hora = document.createElement('P');
+  hora.textContent = `Hora :`
+  hora.classList.add('fw-bold');
+
+  const horaSpan = document.createElement('SPAN');
+  horaSpan.textContent = `${cliente.hora}`
+  horaSpan.classList.add('fw-normal');
+
+  mesa.appendChild(mesaSpan);
+  hora.appendChild(horaSpan);
+
+  contenido.append(mesa, hora)
 };
