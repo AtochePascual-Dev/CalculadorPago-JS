@@ -150,8 +150,12 @@ const agregarPedido = (producto) => {
     eliminarProductoPedido(producto.id);
   }
 
-  // Mostramos el resumen
-  mostrarResumen();
+  // Mostramos el resumen ó un texto
+  (cliente.pedido.length)
+    ? mostrarResumen()
+    : textoPeidoVacio()
+
+  // mostrarResumen();
 };
 
 
@@ -264,7 +268,6 @@ const mostrarResumen = () => {
     btnEliminar.onclick = () => {
       eliminarPedido(id);
 
-      console.log(cliente.pedido);
     };
 
     // Agregar valores a los contenedores
@@ -303,6 +306,22 @@ const limpiarHtml = () => {
 const eliminarPedido = (id) => {
   eliminarProductoPedido(id);
 
-  // Mostramos el resumen
-  mostrarResumen();
+  // Mostramos el resumen ó un texto
+  (cliente.pedido.length)
+    ? mostrarResumen()
+    : textoPeidoVacio()
+};
+
+
+// * Muestar un tecto en pantalla cuando no hay pedidos
+const textoPeidoVacio = () => {
+
+  limpiarHtml();
+
+  const contenido = document.querySelector('#resumen .contenido');
+  const texto = document.createElement('P');
+  texto.textContent = 'Añade los elementos del pedido';
+  texto.classList.add('text-center');
+
+  contenido.appendChild(texto);
 };
