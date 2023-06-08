@@ -195,7 +195,7 @@ const mostrarResumen = () => {
   const contenido = document.querySelector('#resumen .contenido');
 
   const resumen = document.createElement('DIV');
-  resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow');
+  resumen.classList.add('col-md-6', 'card', 'py-2', 'px-3', 'shadow');
 
   const mesa = document.createElement('P');
   mesa.textContent = `Mesa: `;
@@ -284,9 +284,12 @@ const mostrarResumen = () => {
   mesa.appendChild(mesaSpan);
   hora.appendChild(horaSpan);
 
-  resumen.append(mesa, hora, titulo, grupo);
+  resumen.append(titulo, mesa, hora, grupo);
 
   contenido.appendChild(resumen);
+
+  // Mostramos el formulario de propinas
+  mostrarFormularioPropinas();
 };
 
 
@@ -309,13 +312,17 @@ const eliminarPedido = (id) => {
   // Mostramos el resumen ó un texto
   (cliente.pedido.length)
     ? mostrarResumen()
-    : textoPeidoVacio()
+    : textoPeidoVacio();
+
+  const productoEliminado = `#producto-${id}`;
+  const inputEliminado = document.querySelector(`${productoEliminado}`);
+  inputEliminado.value = 0;
 };
 
 
-// * Muestar un tecto en pantalla cuando no hay pedidos
-const textoPeidoVacio = () => {
 
+// * Muestra un texto en pantalla cuando no hay pedidos
+const textoPeidoVacio = () => {
   limpiarHtml();
 
   const contenido = document.querySelector('#resumen .contenido');
@@ -324,4 +331,77 @@ const textoPeidoVacio = () => {
   texto.classList.add('text-center');
 
   contenido.appendChild(texto);
+};
+
+
+
+// * Muestra un formulario de propina
+const mostrarFormularioPropinas = () => {
+  const contenido = document.querySelector('#resumen .contenido');
+
+  const formulario = document.createElement('div');
+  formulario.classList.add('col-md-6', 'formulario');
+
+  const divFormulario = document.createElement('DIV');
+  divFormulario.classList.add('card', 'py-2', 'px-3', 'shadow');
+
+  // titulo
+  const heading = document.createElement('H3');
+  heading.textContent = 'Propina';
+  heading.classList.add('my-4', 'text-center');
+
+  // Radio Buttoms
+  // Radio 10%
+  const radio10 = document.createElement('INPUT');
+  radio10.classList.add('form-check-input');
+  radio10.type = 'radio';
+  radio10.name = 'propina';
+  radio10.value = 10;
+
+  const radio10Label = document.createElement('LABEL');
+  radio10Label.textContent = '10%';
+  radio10Label.classList.add('form-check-label');
+
+  const radio10Div = document.createElement('DIV');
+  radio10Div.classList.add('form-check');
+
+  // Radio 25%
+  const radio25 = document.createElement('INPUT');
+  radio25.classList.add('form-check-input');
+  radio25.type = 'radio';
+  radio25.name = 'propina';
+  radio25.value = 25;
+
+  const radio25Label = document.createElement('LABEL');
+  radio25Label.textContent = '25%';
+  radio25Label.classList.add('form-check-label');
+
+  const radio25Div = document.createElement('DIV');
+  radio25Div.classList.add('form-check');
+
+  // Radio 50%
+  const radio50 = document.createElement('INPUT');
+  radio50.classList.add('form-check-input');
+  radio50.type = 'radio';
+  radio50.name = 'propina';
+  radio50.value = 50;
+
+  const radio50Label = document.createElement('LABEL');
+  radio50Label.textContent = '50%';
+  radio50Label.classList.add('form-check-label');
+
+  const radio50Div = document.createElement('DIV');
+  radio50Div.classList.add('form-check');
+
+
+  // Agregamos elementos
+  radio10Div.append(radio10, radio10Label);
+  radio25Div.append(radio25, radio25Label);
+  radio50Div.append(radio50, radio50Label);
+
+  divFormulario.append(heading, radio10Div, radio25Div, radio50Div);
+
+  formulario.append(divFormulario);
+
+  contenido.appendChild(formulario);
 };
