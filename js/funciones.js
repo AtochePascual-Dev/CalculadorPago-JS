@@ -139,16 +139,16 @@ const mostrarPlatillos = (platillos) => {
 const agregarPedido = (producto) => {
   const exiteProductoEnPedido = cliente.pedido.some(pedido => pedido.id === producto.id);
 
-  // Validamos que al cnatidad sea mayor a 0
+  // Validamos que al cantidad sea mayor a 0
   if (producto.cantidad > 0) {
+    // Agregamos +o aumentamos la cantidad
     (exiteProductoEnPedido)
       ? aumentarCantidadProducto(producto)
       : agregarProductoPedido(producto)
   } else {
-
+    // Eliminamos un producto
+    eliminarProductoPedido(producto.id);
   }
-
-  console.log(cliente.pedido);
 };
 
 
@@ -168,4 +168,11 @@ const aumentarCantidadProducto = (producto) => {
     }
     return pedido;
   });
+};
+
+
+
+// * Elimina un producto de la lista de pedidos
+const eliminarProductoPedido = (id) => {
+  cliente.pedido = cliente.pedido.filter(pedido => pedido.id !== id);
 };
