@@ -184,6 +184,10 @@ const eliminarProductoPedido = (id) => {
 
 // * Muestra el resumen de pedids en pantalla
 const mostrarResumen = () => {
+
+  // Limpiamos el hmtl previo
+  limpiarHtml();
+
   const contenido = document.querySelector('#resumen .contenido');
 
   const resumen = document.createElement('DIV');
@@ -209,4 +213,14 @@ const mostrarResumen = () => {
   hora.appendChild(horaSpan);
 
   contenido.append(mesa, hora)
+};
+
+
+// * Limpia el html previo  
+const limpiarHtml = () => {
+  const contenido = document.querySelector('#resumen .contenido');
+
+  while (contenido.firstChild) {
+    contenido.firstChild.remove()
+  };
 };
